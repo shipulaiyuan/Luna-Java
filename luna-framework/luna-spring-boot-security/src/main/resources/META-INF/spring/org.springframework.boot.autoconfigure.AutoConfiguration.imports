@@ -1,0 +1,3 @@
+com.virtual.luna.framework.security.config.LunaSecurityAutoConfiguration
+com.virtual.luna.framework.security.config.LunaWebSecurityConfigurerAdapter
+

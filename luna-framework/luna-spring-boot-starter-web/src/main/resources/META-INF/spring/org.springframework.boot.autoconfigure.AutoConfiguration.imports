@@ -1,0 +1,3 @@
+com.virtual.luna.framework.web.config.LunaWebAutoConfiguration
+com.virtual.luna.framework.web.config.LunaXssAutoConfiguration
+com.virtual.luna.framework.web.swagger.config.LunaSwaggerAutoConfiguration

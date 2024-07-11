@@ -1,0 +1,6 @@
+# ========== Spring ==========
+spring:
+  profiles:
+    active: dev
+
+

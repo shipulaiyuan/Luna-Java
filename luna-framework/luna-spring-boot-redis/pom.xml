@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.virtual.luna</groupId>
+        <artifactId>luna-framework</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>luna-spring-boot-redis</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+
+        <!-- 集成redis依赖  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- redis 连接池  -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.virtual.luna</groupId>
+            <artifactId>luna-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.virtual.luna</groupId>
+            <artifactId>luna-spring-boot-starter-web</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
