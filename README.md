@@ -4,6 +4,34 @@
 
 ### 详细介绍
 
-本项目主要分为七个部分：
+在基础建站的基础上，本项目可以快速集成市面上的模块功能和作者补充的模块化功能，作者还在不断扩充以下模块：
 
-#### 
+#### 定时任务 Quartz
+
+本模块基于 Quartz 提供强大的任务调度和管理功能，允许用户创建、修改、删除和监控定时任务。
+
+参考文档： [Quartz 模块文档](luna-framework/luna-quartz/ReadMe.md)
+
+#### 代码生成
+
+本模块提供代码生成器，简化了实体类、Mapper、Service 和 Controller 的创建，大大提高开发效率。
+
+参考文档： [代码生成文档](luna-framework/luna-code-generator/ReadMe.md)
+
+#### Extism wasm包调用
+
+本模块实现了多语言调用，通过 Extism 库调用 wasm 包，使项目能够集成多种编程语言的功能。
+
+参考文档： [Extism 模块文档](luna-framework/luna-extism/ReadMe.md)
+
+#### Redis
+
+本模块集成了 Redis，用于实现高速缓存、会话存储和分布式锁等功能，提高系统的性能和可靠性。
+
+参考文档： [Redis 模块文档](luna-framework/luna-redis/ReadMe.md)
+
+#### SpringBoot-Grpc
+
+本模块集成了 SpringBoot 和 gRPC，提供高性能、跨语言的 RPC 框架支持，实现微服务间的高效通信。
+
+参考文档： [SpringBoot-Grpc 文档](luna-framework/luna-grpc/ReadMe.md)
