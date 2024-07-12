@@ -26,6 +26,7 @@
         <guava.version>33.0.0-jre</guava.version>
         <jwt.version>9.31</jwt.version>
         <extism.version>1.0.0</extism.version>
+        <grpc.version>2.10.1.RELEASE</grpc.version>
     </properties>
 
     <dependencyManagement>
@@ -127,6 +128,20 @@
                 <groupId>org.extism.sdk</groupId>
                 <artifactId>extism</artifactId>
                 <version>${extism.version}</version>
+            </dependency>
+
+            <!-- grpc 客户端-->
+            <dependency>
+                <groupId>net.devh</groupId>
+                <artifactId>grpc-client-spring-boot-starter</artifactId>
+                <version>${grpc.version}</version>
+            </dependency>
+
+            <!-- grpc 服务端-->
+            <dependency>
+                <groupId>net.devh</groupId>
+                <artifactId>grpc-server-spring-boot-starter</artifactId>
+                <version>${grpc.version}</version>
             </dependency>
 
         </dependencies>
