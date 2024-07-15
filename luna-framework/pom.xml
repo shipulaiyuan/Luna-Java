@@ -22,6 +22,7 @@
         <module>luna-quartz</module>
         <module>luna-wasm-extism</module>
         <module>luna-grpc</module>
+        <module>luna-sms</module>
     </modules>
 
 </project>
