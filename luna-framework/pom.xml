@@ -22,7 +22,9 @@
         <module>luna-quartz</module>
         <module>luna-wasm-extism</module>
         <module>luna-grpc</module>
-        <module>luna-sms</module>
+        <module>luna-aliyun-sms</module>
+        <module>luna-aliyun-email</module>
+        <module>luna-aliyun-oss</module>
     </modules>
 
 </project>
