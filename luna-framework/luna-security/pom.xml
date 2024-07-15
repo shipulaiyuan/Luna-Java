@@ -6,42 +6,32 @@
         <artifactId>luna-framework</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>luna-spring-boot-mybatis-plus</artifactId>
+    <artifactId>luna-security</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
-
     <dependencies>
-
         <dependency>
             <groupId>com.virtual.luna</groupId>
-            <artifactId>luna-spring-boot-starter-web</artifactId>
+            <artifactId>luna-starter-web</artifactId>
             <version>${revision}</version>
         </dependency>
 
-        <!-- Mysql驱动包 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- 工具类相关 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
         </dependency>
-
-        <!-- mybatis plus -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-        </dependency>
-
-
     </dependencies>
 
 

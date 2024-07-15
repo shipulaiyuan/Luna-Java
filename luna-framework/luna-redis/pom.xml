@@ -6,7 +6,7 @@
         <artifactId>luna-framework</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>luna-spring-boot-redis</artifactId>
+    <artifactId>luna-redis</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
@@ -31,7 +31,7 @@
 
         <dependency>
             <groupId>com.virtual.luna</groupId>
-            <artifactId>luna-spring-boot-starter-web</artifactId>
+            <artifactId>luna-starter-web</artifactId>
             <version>${revision}</version>
         </dependency>
 

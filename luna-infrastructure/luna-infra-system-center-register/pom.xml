@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.virtual.luna</groupId>
-            <artifactId>luna-spring-boot-starter-web</artifactId>
+            <artifactId>luna-starter-web</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>

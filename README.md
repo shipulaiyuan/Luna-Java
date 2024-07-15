@@ -58,7 +58,7 @@
 
 ### 感谢
 
-😀在此，我要特别感谢两个开源网站🎈
+😀在此，我要特别感谢两个开源项目，大佬牛逼🎈
 
 [RuoYi](https://gitee.com/y_project/RuoYi-Vue)
 

@@ -14,14 +14,14 @@
 
     <modules>
         <module>luna-common</module>
-        <module>luna-spring-boot-starter-web</module>
-        <module>luna-spring-boot-mybatis-plus</module>
-        <module>luna-spring-boot-redis</module>
-        <module>luna-spring-boot-security</module>
+        <module>luna-starter-web</module>
+        <module>luna-mybatis-plus</module>
+        <module>luna-redis</module>
+        <module>luna-security</module>
         <module>luna-code-generate</module>
         <module>luna-quartz</module>
         <module>luna-wasm-extism</module>
-        <module>luna-spring-boot-grpc</module>
+        <module>luna-grpc</module>
     </modules>
 
 </project>

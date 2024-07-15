@@ -6,7 +6,7 @@
         <artifactId>luna-framework</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>luna-spring-boot-starter-web</artifactId>
+    <artifactId>luna-starter-web</artifactId>
     <name>${project.artifactId}</name>
     <description>SpringBoot Web 框架</description>
     <packaging>jar</packaging>
