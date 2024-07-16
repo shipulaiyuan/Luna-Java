@@ -13,6 +13,8 @@
 
     <modules>
         <module>luna-module-system-center</module>
+        <module>luna-module-demo-client-a</module>
+        <module>luna-module-demo-client-b</module>
     </modules>
 
 

@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.virtual.luna</groupId>
-        <artifactId>luna-framework</artifactId>
+        <artifactId>luna-server</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>luna-aliyun-oss</artifactId>
+    <artifactId>luna-server-demo-client-a</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
@@ -18,10 +18,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <groupId>com.virtual.luna</groupId>
+            <artifactId>luna-module-demo-client-a</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>

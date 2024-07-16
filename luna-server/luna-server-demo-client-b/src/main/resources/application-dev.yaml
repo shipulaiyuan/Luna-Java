@@ -1,0 +1,94 @@
+
+# ======== 服务注册发现 ========
+service:
+  # 服务名
+  name: 测试Demo-B
+  # 服务唯一标识
+  key: test-demo-b
+  # 是否启用注册
+  enabled: true
+  # 健康检查配置
+  health_check:
+    # 健康检查接口路径
+    endpoint: /healthy
+    # 健康检查间隔时间（毫秒）
+    interval_ms: 10000
+    # 地址获取模式: config（手动配置）, client（客户端自动获取）, server（服务端自动获取）
+    address_mode: server
+    # 健康检查地址，当 address_mode 为 config 时使用
+    address: 172.17.0.231
+    # 健康检查端口
+    port: ${server.port}
+    # 是否启用健康检查
+    enabled: true
+  # 注册配置
+  registration:
+    # 注册服务的URL
+    url: http://172.17.0.207:11000/server-register
+    # 注册间隔时间（毫秒）
+    interval_ms: 30000
+    # 最大注册实例数
+    max_instances: 5
+  # 服务端获取配置
+  config-addr: http://172.17.0.207:11000/server-config/${service.key}
+  config-enabled: false
+spring:
+  application:
+    # 项目名
+    name: test-demo-b
+luna:
+  # 项目名
+  name: ${spring.application.name}
+  # 系统简介
+  description: 测试Demo-B
+  # 版本
+  version: 1.0.0
+  # Web 配置
+  web:
+    apiList:
+      - prefix: "/app-api/v1"    # API 的前缀
+        controller: "**.controller.app.**"    # 控制器包路径
+      - prefix: "/admin-api/v1"
+        controller: "**.controller.admin.**"
+  # Xss
+  xss:
+    enable: true
+    # 排除链接
+    exclude-urls:
+      - /admin/** # 不处理 admin 的请求
+  # Swagger
+  swagger:
+    # 标题
+    title: ${luna.name}
+    # 简介
+    description: ${luna.description}
+    # 版本
+    version: ${luna.version}
+    # Email
+    email: system.center.luna.com
+    # License
+    license: Luna
+    # Url
+    license-url: https://system.center.luna.com
+
+# ======== 接口文档配置 ========
+springdoc:
+  # api-docs 文档
+  api-docs:
+    # 是否开启 文档
+    enabled: true
+    # 文档 地址
+    path: /v3/api-docs
+  swagger-ui:
+    # 是否开启 UI
+    enabled: true
+    # Swagger 网址 : /swagger-ui/index.html
+    path: /swagger-ui
+
+# ======== 系统日志设置 ========
+logging:
+  level:
+    com.virtual.luna: debug
+    org.springframework: warn
+
+
