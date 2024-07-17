@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
+
 @SpringBootTest
 public class BaPoTestController {
 
@@ -26,6 +28,16 @@ public class BaPoTestController {
         String s = remoteService.testRequestParam("1111", "2222");
 
         System.out.println(s);
+
+        // 测试 PostMapping RequestBody
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("a", new HashMap<String, Object>() {
+            {
+                put("222", "333");
+            }
+        });
+        String s1 = remoteService.testRequestBody(map);
+        System.out.println(s1);
     }
 }
 

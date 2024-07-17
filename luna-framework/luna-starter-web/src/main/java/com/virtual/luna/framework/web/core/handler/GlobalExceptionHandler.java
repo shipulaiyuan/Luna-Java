@@ -33,6 +33,7 @@ public class GlobalExceptionHandler {
                                                                     HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',不支持'{}'请求", requestURI, e.getMethod());
+        e.printStackTrace();
         return CommonResult.error("请求方式不支持: " + e.getMethod());
     }
 

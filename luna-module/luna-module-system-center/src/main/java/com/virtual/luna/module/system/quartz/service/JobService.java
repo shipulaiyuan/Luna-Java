@@ -80,7 +80,7 @@ public interface JobService {
      * @param name
      * @return
      */
-    SysJob selectByName(String name);
+    List<SysJob> selectByName(String name);
 
     /**
      * 根据查询参数查询定时任务

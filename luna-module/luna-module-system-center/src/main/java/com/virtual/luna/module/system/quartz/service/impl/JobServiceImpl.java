@@ -168,12 +168,12 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public SysJob selectByName(String value) {
+    public List<SysJob> selectByName(String value) {
         LambdaQueryWrapper<SysJob> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(SysJob::getDelFlag,"0");
         lambdaQueryWrapper.eq(SysJob::getName,value);
-        SysJob sysJob = jobMapper.selectOne(lambdaQueryWrapper);
-        return sysJob;
+        List<SysJob> sysJobs = jobMapper.selectList(lambdaQueryWrapper);
+        return sysJobs;
     }
 
 

@@ -1,5 +1,9 @@
 # ========== Spring ==========
 spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   application:
     # 项目名
     name: luna-system-center-server

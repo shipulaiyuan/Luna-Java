@@ -1,4 +1,4 @@
-package com.virtual.luna.infra.register.remote;
+package com.virtual.luna.infra.register.scanner;
 
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
@@ -10,11 +10,11 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
- * 自定义的扫描器，用于扫描带有特定注解的接口
+ * 接口扫描器
  */
-public class TransferServiceScanner extends ClassPathBeanDefinitionScanner {
+public class InterfacesScanner extends ClassPathBeanDefinitionScanner {
 
-    public TransferServiceScanner(BeanDefinitionRegistry registry) {
+    public InterfacesScanner(BeanDefinitionRegistry registry) {
         super(registry);
     }
 
@@ -38,7 +38,7 @@ public class TransferServiceScanner extends ClassPathBeanDefinitionScanner {
      * 执行扫描，并返回符合条件的 BeanDefinitionHolder 集合
      */
     @Override
-    protected Set<BeanDefinitionHolder> doScan(String... basePackages) {
+    public Set<BeanDefinitionHolder> doScan(String... basePackages) {
         return super.doScan(basePackages);
     }
 }

@@ -1,6 +1,7 @@
 package com.virtual.luna.infra.register.remote;
 
 import com.virtual.luna.infra.register.annotation.RemoteTransferService;
+import com.virtual.luna.infra.register.constant.BoPoConstants;
 import com.virtual.luna.infra.register.properties.ServiceRegisterProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -18,6 +19,8 @@ import java.util.Map;
 
 @Component
 public class BaPoFactory {
+
+
 
     @Autowired
     private ServiceRegisterProperties serviceRegisterProperties;
@@ -50,43 +53,47 @@ public class BaPoFactory {
 
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.set("Service-Name", serviceName);
-            headers.set("Client-Path", clientPath);
+            headers.set(BoPoConstants.SERVICE_NAME, serviceName);
+            headers.set(BoPoConstants.CLIENT_PATH, clientPath);
 
             if (returnType.equals(String.class)) {
                 if (method.isAnnotationPresent(GetMapping.class)) {
                     Map<String, Object> pathVariables = extractPathVariableValues(method, args);
                     Map<String, String> queryParams = extractRequestParamValues(method, args);
                     clientPath = appendPathVariables(clientPath, pathVariables);
-                    headers.set("Client-Path", clientPath);
+                    headers.set(BoPoConstants.CLIENT_PATH, clientPath);
                     return get(fullUrl, queryParams, String.class, headers);
                 } else if (method.isAnnotationPresent(PostMapping.class)) {
-                    Object requestBody = extractRequestBody(args);
+                    Object requestBody = extractRequestBody(method, args);
+                    headers.set("Content-Type", "application/json");
                     return post(fullUrl, requestBody, String.class, headers);
                 } else if (method.isAnnotationPresent(PutMapping.class)) {
-                    Object requestBody = extractRequestBody(args);
+                    Object requestBody = extractRequestBody(method, args);
+                    headers.set("Content-Type", "application/json");
                     return put(fullUrl, requestBody, String.class, headers);
                 } else if (method.isAnnotationPresent(DeleteMapping.class)) {
                     Map<String, Object> pathVariables = extractPathVariableValues(method, args);
                     Map<String, String> queryParams = extractRequestParamValues(method, args);
                     clientPath = appendPathVariables(clientPath, pathVariables);
-                    headers.set("Client-Path", clientPath);
+                    headers.set(BoPoConstants.CLIENT_PATH, clientPath);
                     return delete(fullUrl, queryParams, String.class, headers);
                 } else {
                     throw new UnsupportedOperationException("Unsupported HTTP method for returnType String");
                 }
             } else if (returnType.equals(Void.TYPE)) {
                 if (method.isAnnotationPresent(PostMapping.class)) {
-                    Object requestBody = extractRequestBody(args);
+                    Object requestBody = extractRequestBody(method, args);
+                    headers.set("Content-Type", "application/json");
                     post(fullUrl, requestBody, Void.class, headers);
                 } else if (method.isAnnotationPresent(PutMapping.class)) {
-                    Object requestBody = extractRequestBody(args);
+                    Object requestBody = extractRequestBody(method, args);
+                    headers.set("Content-Type", "application/json");
                     put(fullUrl, requestBody, Void.class, headers);
                 } else if (method.isAnnotationPresent(DeleteMapping.class)) {
                     Map<String, Object> pathVariables = extractPathVariableValues(method, args);
                     Map<String, String> queryParams = extractRequestParamValues(method, args);
                     clientPath = appendPathVariables(clientPath, pathVariables);
-                    headers.set("Client-Path", clientPath);
+                    headers.set(BoPoConstants.CLIENT_PATH, clientPath);
                     delete(fullUrl, queryParams, Void.class, headers);
                 } else {
                     throw new UnsupportedOperationException("Unsupported HTTP method for returnType Void");
@@ -160,10 +167,13 @@ public class BaPoFactory {
         return requestParams;
     }
 
-    private Object extractRequestBody(Object[] args) {
-        for (Object arg : args) {
-            if (arg != null && arg.getClass().isAnnotationPresent(RequestBody.class)) {
-                return arg;
+    private Object extractRequestBody(Method method, Object[] args) {
+        Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+        for (int i = 0; i < parameterAnnotations.length; i++) {
+            for (Annotation annotation : parameterAnnotations[i]) {
+                if (annotation instanceof RequestBody) {
+                    return args[i];
+                }
             }
         }
         return null;

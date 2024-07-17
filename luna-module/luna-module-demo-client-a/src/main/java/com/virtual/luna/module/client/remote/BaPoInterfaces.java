@@ -31,5 +31,6 @@ public interface BaPoInterfaces {
     @PostMapping("/test/requestBody")
     public String testRequestBody(@RequestBody HashMap<String,Object> map);
 
+
 }
 

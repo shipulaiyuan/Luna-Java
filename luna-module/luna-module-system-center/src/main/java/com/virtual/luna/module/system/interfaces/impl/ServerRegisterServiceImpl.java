@@ -17,6 +17,7 @@ import com.virtual.luna.module.system.vo.RegisterBodyVo;
 import com.virtual.luna.module.system.interfaces.IServerRegisterService;
 import com.virtual.luna.module.system.quartz.service.JobService;
 import com.virtual.luna.module.system.service.ISysContainerService;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
@@ -25,21 +26,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ServerRegisterServiceImpl implements IServerRegisterService {
 
     private static final Logger logger = LoggerFactory.getLogger(ServerRegisterServiceImpl.class);
 
-    @Autowired
+    @Resource
     private SysClustersMapper sysClustersMapper;
 
-    @Autowired
+    @Resource
     private SysContainerMapper sysContainerMapper;
 
-    @Autowired
+    @Resource
     private ISysContainerService sysContainerService;
 
-    @Autowired
+    @Resource
     private JobService jobService;
 
     @Transactional(rollbackFor = Exception.class)
@@ -95,7 +98,7 @@ public class ServerRegisterServiceImpl implements IServerRegisterService {
             }
 
             // 查询容器信息，如果存在则删除旧记录
-            SysContainer sysContainer = sysContainerMapper.selectOne(
+            List<SysContainer> sysContainers = sysContainerMapper.selectList(
                     new LambdaQueryWrapper<SysContainer>()
                             .eq(SysContainer::getDelFlag, "0")
                             .eq(SysContainer::getClustersKey, serviceUniqueKey)
@@ -103,20 +106,26 @@ public class ServerRegisterServiceImpl implements IServerRegisterService {
                             .eq(SysContainer::getContainerPort, port)
             );
 
-            if (sysContainer != null) {
+            if (sysContainers != null) {
 
-                SysJob sysJob = jobService.selectByName(address + ":" + port);
+                for (SysContainer sysContainer : sysContainers) {
+                    // 增加容错
+                    List<SysJob> sysJobs = jobService.selectByName(address + ":" + port);
 
-                if(ObjectUtils.isNotEmpty(sysJob)){
-                    logger.info("删除现有定时任务: {}", sysJob);
-                    jobService.deleteJob(sysJob.getId());
-                    logger.info("现有定时任务条目删除成功.");
+                    if(ObjectUtils.isNotEmpty(sysJobs)){
+                        for (SysJob sysJob : sysJobs) {
+                            if(ObjectUtils.isNotEmpty(sysJob)){
+                                logger.info("删除现有定时任务: {}", sysJob);
+                                jobService.deleteJob(sysJob.getId());
+                                logger.info("现有定时任务条目删除成功.");
+                            }
+                        }
+                    }
+
+                    logger.info("删除现有容器条目: {}", sysContainer);
+                    sysContainerService.deleteContainer(sysContainer.getId());
+                    logger.info("现有容器条目删除成功.");
                 }
-
-                logger.info("删除现有容器条目: {}", sysContainer);
-                sysContainerService.deleteContainer(sysContainer.getId());
-                logger.info("现有容器条目删除成功.");
-
             }
 
             // 创建新的容器记录

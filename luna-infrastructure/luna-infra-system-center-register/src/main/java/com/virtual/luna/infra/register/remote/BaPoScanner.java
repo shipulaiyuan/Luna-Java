@@ -1,6 +1,7 @@
 package com.virtual.luna.infra.register.remote;
 
 import com.virtual.luna.infra.register.annotation.RemoteTransferService;
+import com.virtual.luna.infra.register.scanner.InterfacesScanner;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
@@ -11,10 +12,10 @@ import java.util.Set;
 
 @Component
 public class BaPoScanner {
-    private final TransferServiceScanner scanner;
+    private final InterfacesScanner scanner;
 
     public BaPoScanner(DefaultListableBeanFactory beanFactory) {
-        this.scanner = new TransferServiceScanner(beanFactory);
+        this.scanner = new InterfacesScanner(beanFactory);
         scanner.addIncludeFilter(new AnnotationTypeFilter(RemoteTransferService.class));
     }
 

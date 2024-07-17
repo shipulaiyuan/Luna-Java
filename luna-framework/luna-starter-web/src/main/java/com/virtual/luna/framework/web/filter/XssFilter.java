@@ -50,7 +50,8 @@ public class XssFilter extends OncePerRequestFilter {
 
         // 如果匹配到无需过滤，则不过滤
         String uri = request.getRequestURI();
-        return properties.getExcludeUrls().stream().anyMatch(excludeUrl -> pathMatcher.match(excludeUrl, uri));
+        boolean b = properties.getExcludeUrls().stream().anyMatch(excludeUrl -> pathMatcher.match(excludeUrl, uri));
+        return b;
     }
 
 }
