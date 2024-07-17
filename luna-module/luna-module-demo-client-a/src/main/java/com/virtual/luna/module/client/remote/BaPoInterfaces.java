@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RemoteTransferService("test-demo-b")
-public interface TestRemoteInterfaces {
+public interface BaPoInterfaces {
 
     /**
      * PathVariable 测试
@@ -20,7 +20,7 @@ public interface TestRemoteInterfaces {
      * RequestParam 测试
      * @return
      */
-    @GetMapping("/test")
+    @GetMapping("/test/requestParam")
     public String testRequestParam(@RequestParam String a,
                                    @RequestParam String b);
 

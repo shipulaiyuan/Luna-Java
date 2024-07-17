@@ -13,7 +13,7 @@ spring:
   # ========== Quartz ==========
   quartz:
     # 是否开启定时任务
-    auto-startup: true
+    auto-startup: false
     # Scheduler 名字。默认为 schedulerName
     scheduler-name: LunaSchedulerName
     # Job 存储器类型。默认为 memory 表示内存，可选 jdbc 使用数据库。

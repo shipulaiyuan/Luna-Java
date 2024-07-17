@@ -12,9 +12,9 @@ import java.util.Set;
 /**
  * 自定义的扫描器，用于扫描带有特定注解的接口
  */
-public class RemoteTransferServiceScanner extends ClassPathBeanDefinitionScanner {
+public class TransferServiceScanner extends ClassPathBeanDefinitionScanner {
 
-    public RemoteTransferServiceScanner(BeanDefinitionRegistry registry) {
+    public TransferServiceScanner(BeanDefinitionRegistry registry) {
         super(registry);
     }
 

@@ -3,12 +3,11 @@ package com.virtual.luna.infra.register.remote;
 import com.virtual.luna.infra.register.annotation.RemoteTransferService;
 import com.virtual.luna.infra.register.properties.ServiceRegisterProperties;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
@@ -18,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class RemoteServiceFactory {
+public class BaPoFactory {
 
     @Autowired
     private ServiceRegisterProperties serviceRegisterProperties;
@@ -47,38 +46,48 @@ public class RemoteServiceFactory {
     }
 
     public Object forwardServer(String serviceName, String forwardUrl, String clientPath, Object[] args, Class<?> returnType, Method method) {
-        String fullUrl = forwardUrl + "/" + serviceName + "/" + clientPath;
+        String fullUrl = forwardUrl;
 
         try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Service-Name", serviceName);
+            headers.set("Client-Path", clientPath);
+
             if (returnType.equals(String.class)) {
                 if (method.isAnnotationPresent(GetMapping.class)) {
                     Map<String, Object> pathVariables = extractPathVariableValues(method, args);
-                    fullUrl = appendPathVariables(fullUrl, pathVariables);
-                    return get(fullUrl, String.class);
+                    Map<String, String> queryParams = extractRequestParamValues(method, args);
+                    clientPath = appendPathVariables(clientPath, pathVariables);
+                    headers.set("Client-Path", clientPath);
+                    return get(fullUrl, queryParams, String.class, headers);
                 } else if (method.isAnnotationPresent(PostMapping.class)) {
                     Object requestBody = extractRequestBody(args);
-                    return post(fullUrl, requestBody, String.class);
+                    return post(fullUrl, requestBody, String.class, headers);
                 } else if (method.isAnnotationPresent(PutMapping.class)) {
                     Object requestBody = extractRequestBody(args);
-                    return put(fullUrl, requestBody, String.class);
+                    return put(fullUrl, requestBody, String.class, headers);
                 } else if (method.isAnnotationPresent(DeleteMapping.class)) {
                     Map<String, Object> pathVariables = extractPathVariableValues(method, args);
-                    fullUrl = appendPathVariables(fullUrl, pathVariables);
-                    return delete(fullUrl, String.class);
+                    Map<String, String> queryParams = extractRequestParamValues(method, args);
+                    clientPath = appendPathVariables(clientPath, pathVariables);
+                    headers.set("Client-Path", clientPath);
+                    return delete(fullUrl, queryParams, String.class, headers);
                 } else {
                     throw new UnsupportedOperationException("Unsupported HTTP method for returnType String");
                 }
             } else if (returnType.equals(Void.TYPE)) {
                 if (method.isAnnotationPresent(PostMapping.class)) {
                     Object requestBody = extractRequestBody(args);
-                    post(fullUrl, requestBody, Void.class);
+                    post(fullUrl, requestBody, Void.class, headers);
                 } else if (method.isAnnotationPresent(PutMapping.class)) {
                     Object requestBody = extractRequestBody(args);
-                    put(fullUrl, requestBody, Void.class);
+                    put(fullUrl, requestBody, Void.class, headers);
                 } else if (method.isAnnotationPresent(DeleteMapping.class)) {
                     Map<String, Object> pathVariables = extractPathVariableValues(method, args);
-                    fullUrl = appendPathVariables(fullUrl, pathVariables);
-                    delete(fullUrl, Void.class);
+                    Map<String, String> queryParams = extractRequestParamValues(method, args);
+                    clientPath = appendPathVariables(clientPath, pathVariables);
+                    headers.set("Client-Path", clientPath);
+                    delete(fullUrl, queryParams, Void.class, headers);
                 } else {
                     throw new UnsupportedOperationException("Unsupported HTTP method for returnType Void");
                 }
@@ -87,7 +96,6 @@ public class RemoteServiceFactory {
                 throw new UnsupportedOperationException("Unsupported returnType");
             }
         } catch (Exception e) {
-            // 记录日志或者抛出自定义异常
             e.printStackTrace();
             throw new RuntimeException("Failed to invoke remote service", e);
         }
@@ -134,6 +142,24 @@ public class RemoteServiceFactory {
         return pathVariables;
     }
 
+    private Map<String, String> extractRequestParamValues(Method method, Object[] args) {
+        Map<String, String> requestParams = new HashMap<>();
+        Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+        for (int i = 0; i < parameterAnnotations.length; i++) {
+            for (Annotation annotation : parameterAnnotations[i]) {
+                if (annotation instanceof RequestParam) {
+                    RequestParam requestParam = (RequestParam) annotation;
+                    String paramName = requestParam.value();
+                    if (paramName.isEmpty()) {
+                        paramName = method.getParameters()[i].getName();
+                    }
+                    requestParams.put(paramName, args[i].toString());
+                }
+            }
+        }
+        return requestParams;
+    }
+
     private Object extractRequestBody(Object[] args) {
         for (Object arg : args) {
             if (arg != null && arg.getClass().isAnnotationPresent(RequestBody.class)) {
@@ -143,25 +169,35 @@ public class RemoteServiceFactory {
         return null;
     }
 
-
-    private <T> T get(String url, Class<T> responseType) {
-        ResponseEntity<T> responseEntity = restTemplate.getForEntity(url, responseType);
+    public <T> T get(String url, Map<String, String> queryParams, Class<T> responseType, HttpHeaders headers) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        if (queryParams != null && !queryParams.isEmpty()) {
+            queryParams.forEach(builder::queryParam);
+        }
+        HttpEntity<Object> entity = new HttpEntity<>(headers);
+        ResponseEntity<T> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseType);
         return responseEntity.getBody();
     }
 
-    private <T> T post(String url, Object requestBody, Class<T> responseType) {
-        ResponseEntity<T> responseEntity = restTemplate.postForEntity(url, requestBody, responseType);
+    public <T> T post(String url, Object requestBody, Class<T> responseType, HttpHeaders headers) {
+        HttpEntity<Object> entity = new HttpEntity<>(requestBody, headers);
+        ResponseEntity<T> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, responseType);
         return responseEntity.getBody();
     }
 
-    private <T> T put(String url, Object requestBody, Class<T> responseType) {
-        HttpEntity<Object> requestEntity = new HttpEntity<>(requestBody);
-        ResponseEntity<T> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, responseType);
+    public  <T> T put(String url, Object requestBody, Class<T> responseType, HttpHeaders headers) {
+        HttpEntity<Object> entity = new HttpEntity<>(requestBody, headers);
+        ResponseEntity<T> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, entity, responseType);
         return responseEntity.getBody();
     }
 
-    private <T> T delete(String url, Class<T> responseType) {
-        ResponseEntity<T> responseEntity = restTemplate.exchange(url, HttpMethod.DELETE, null, responseType);
+    public <T> T delete(String url, Map<String, String> queryParams, Class<T> responseType, HttpHeaders headers) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        if (queryParams != null && !queryParams.isEmpty()) {
+            queryParams.forEach(builder::queryParam);
+        }
+        HttpEntity<Object> entity = new HttpEntity<>(headers);
+        ResponseEntity<T> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.DELETE, entity, responseType);
         return responseEntity.getBody();
     }
 }

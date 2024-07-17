@@ -28,7 +28,7 @@ service:
     # 注册服务的URL
     url: ${service.registration.base}/server-register
     # 通讯 url
-    forward: ${service.registration.base}/server-register
+    forward: http://127.0.0.1:11000/remote/forward
     # 注册间隔时间（毫秒）
     interval_ms: 30000
     # 最大注册实例数

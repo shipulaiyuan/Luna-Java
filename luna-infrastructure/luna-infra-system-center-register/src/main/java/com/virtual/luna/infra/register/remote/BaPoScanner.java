@@ -2,7 +2,6 @@ package com.virtual.luna.infra.register.remote;
 
 import com.virtual.luna.infra.register.annotation.RemoteTransferService;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.stereotype.Component;
@@ -11,11 +10,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class RemoteServiceScanner {
-    private final RemoteTransferServiceScanner scanner;
+public class BaPoScanner {
+    private final TransferServiceScanner scanner;
 
-    public RemoteServiceScanner(DefaultListableBeanFactory beanFactory) {
-        this.scanner = new RemoteTransferServiceScanner(beanFactory);
+    public BaPoScanner(DefaultListableBeanFactory beanFactory) {
+        this.scanner = new TransferServiceScanner(beanFactory);
         scanner.addIncludeFilter(new AnnotationTypeFilter(RemoteTransferService.class));
     }
 
