@@ -21,3 +21,9 @@ https://plugins.jetbrains.com/plugin/10080-rainbow-brackets
 Grep Console
 
 https://plugins.jetbrains.com/plugin/7125-grep-console
+
+### 5、进度条
+
+Nyan progress bar
+
+https://plugins.jetbrains.com/plugin/8575-nyan-progress-bar
