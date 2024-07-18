@@ -115,14 +115,30 @@ public class LunaWebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeHttpRequests(c -> c
-                    .requestMatchers(HttpMethod.GET, "/*.html", "/*.html", "/*.css", "/*.js").permitAll()
+                    .requestMatchers(HttpMethod.GET,
+                                "/static/**",
+                                "/dist/**",
+                                "/*.html",
+                                "/*.ico",
+                                "/*.css",
+                                "/*.js",
+                                "/*/*.ico",
+                                "/*/*.html",
+                                "/*/*.css",
+                                "/*/*.js").permitAll()
                     // @PermitAll 无需认证
-                    .requestMatchers(HttpMethod.GET, permitAllUrls.get(HttpMethod.GET).toArray(new String[0])).permitAll()
-                    .requestMatchers(HttpMethod.POST, permitAllUrls.get(HttpMethod.POST).toArray(new String[0])).permitAll()
-                    .requestMatchers(HttpMethod.PUT, permitAllUrls.get(HttpMethod.PUT).toArray(new String[0])).permitAll()
-                    .requestMatchers(HttpMethod.DELETE, permitAllUrls.get(HttpMethod.DELETE).toArray(new String[0])).permitAll()
-                    .requestMatchers(HttpMethod.HEAD, permitAllUrls.get(HttpMethod.HEAD).toArray(new String[0])).permitAll()
-                    .requestMatchers(HttpMethod.PATCH, permitAllUrls.get(HttpMethod.PATCH).toArray(new String[0])).permitAll()
+                    .requestMatchers(HttpMethod.GET,
+                            permitAllUrls.get(HttpMethod.GET).toArray(new String[0])).permitAll()
+                    .requestMatchers(HttpMethod.POST,
+                            permitAllUrls.get(HttpMethod.POST).toArray(new String[0])).permitAll()
+                    .requestMatchers(HttpMethod.PUT,
+                            permitAllUrls.get(HttpMethod.PUT).toArray(new String[0])).permitAll()
+                    .requestMatchers(HttpMethod.DELETE,
+                            permitAllUrls.get(HttpMethod.DELETE).toArray(new String[0])).permitAll()
+                    .requestMatchers(HttpMethod.HEAD,
+                            permitAllUrls.get(HttpMethod.HEAD).toArray(new String[0])).permitAll()
+                    .requestMatchers(HttpMethod.PATCH,
+                            permitAllUrls.get(HttpMethod.PATCH).toArray(new String[0])).permitAll()
                     // luna.security.permit-all-urls 无需认证
                     .requestMatchers(securityProperties.getPermitAllUrls().toArray(new String[0])).permitAll()
                 )

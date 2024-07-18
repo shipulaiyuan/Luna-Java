@@ -1,6 +1,7 @@
 package com.virtual.luna.infra.system.security;
 
 import com.virtual.luna.framework.security.config.AuthorizeRequestsCustomizer;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.stereotype.Component;
