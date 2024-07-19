@@ -33,8 +33,7 @@ public class GlobalExceptionHandler {
                                                                     HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',不支持'{}'请求", requestURI, e.getMethod());
-        e.printStackTrace();
-        return CommonResult.error("请求方式不支持: " + e.getMethod());
+        return CommonResult.error("请求方式不支持。" , e.getMethod());
     }
 
     /**
@@ -45,7 +44,7 @@ public class GlobalExceptionHandler {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',发生未知异常.", requestURI, e);
         String message = e.getMessage();
-        return CommonResult.error("服务器内部错误，请联系管理员" + message);
+        return CommonResult.error("服务器内部错误，请联系管理员。" , message);
     }
 
     /**
@@ -56,7 +55,7 @@ public class GlobalExceptionHandler {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',发生系统异常.", requestURI, e);
         String message = e.getMessage();
-        return CommonResult.error("服务器内部错误，请联系管理员。" + message);
+        return CommonResult.error("服务器内部错误，请联系管理员。" , message);
     }
 
     /**
@@ -76,7 +75,7 @@ public class GlobalExceptionHandler {
     public CommonResult<String> handleBindException(BindException e) {
         log.error(e.getMessage(), e);
         String message = e.getAllErrors().get(0).getDefaultMessage();
-        return CommonResult.error("参数绑定失败: " + message);
+        return CommonResult.error("参数绑定失败。" , message);
     }
 
     /**
@@ -86,7 +85,7 @@ public class GlobalExceptionHandler {
     public CommonResult<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error(e.getMessage(), e);
         String message = e.getBindingResult().getFieldError().getDefaultMessage();
-        return CommonResult.error("参数验证失败: " + message);
+        return CommonResult.error("参数验证失败。" , message);
     }
 
     /**
@@ -96,7 +95,7 @@ public class GlobalExceptionHandler {
     public CommonResult<String> handleMissingServletRequestParameterException(MissingServletRequestParameterException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',缺少请求参数: '{}'", requestURI, e.getParameterName());
-        return CommonResult.error("缺少请求参数: " + e.getParameterName());
+        return CommonResult.error("缺少请求参数。" , e.getParameterName());
     }
 
     /**
@@ -106,7 +105,7 @@ public class GlobalExceptionHandler {
     public CommonResult<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',请求体不可读", requestURI, e);
-        return CommonResult.error("请求体不可读");
+        return CommonResult.error("请求体不可读。", e.getMessage());
     }
 }
 

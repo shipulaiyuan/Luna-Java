@@ -21,7 +21,6 @@ import java.util.Map;
 public class BaPoFactory {
 
 
-
     @Autowired
     private ServiceRegisterProperties serviceRegisterProperties;
 

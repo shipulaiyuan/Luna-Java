@@ -41,6 +41,17 @@ public class CommonResult<T> implements Serializable {
     }
 
     /**
+     * 创建失败结果
+     *
+     * @param data 返回的数据
+     * @param <T>  返回的泛型
+     * @return 新的 CommonResult 对象
+     */
+    public static <T> CommonResult<T> error(String msg , T data ) {
+        return new CommonResult<>(GlobalErrorCodeConstants.INTERNAL_SERVER_ERROR.getCode(), data, msg);
+    }
+
+    /**
      * 根据 ErrorCode 创建错误结果
      *
      * @param errorCode 错误码和错误信息的封装
