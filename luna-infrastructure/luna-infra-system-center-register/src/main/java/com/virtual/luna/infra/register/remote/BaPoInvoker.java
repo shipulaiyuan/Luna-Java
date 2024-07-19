@@ -17,10 +17,10 @@ public class BaPoInvoker implements ApplicationRunner {
     @Resource
     private BaPoScanner remoteServiceScanner;
 
-    @Autowired
+    @Resource
     private BaPoFactory remoteServiceFactory;
 
-    @Autowired
+    @Resource
     private ApplicationContext applicationContext;
 
     @Override
