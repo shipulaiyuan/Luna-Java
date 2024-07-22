@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.virtual.luna</groupId>
+        <artifactId>luna-infrastructure</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>luna-infra-tian-ji-pavilion-admin</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.virtual.luna</groupId>
+            <artifactId>luna-redis</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.virtual.luna</groupId>
+            <artifactId>luna-starter-web</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.virtual.luna</groupId>
+            <artifactId>luna-mybatis-plus</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.virtual.luna</groupId>
+            <artifactId>luna-quartz</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.virtual.luna</groupId>
+            <artifactId>luna-security</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.virtual.luna</groupId>
+            <artifactId>luna-infra-tong-tian-bridge</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+
+</project>

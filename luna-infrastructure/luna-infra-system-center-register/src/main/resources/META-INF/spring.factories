@@ -1,3 +1,0 @@
-org.springframework.boot.env.EnvironmentPostProcessor=\
-  com.virtual.luna.infra.register.core.LocalConfigProcessor,\
-  com.virtual.luna.infra.register.core.RemoteConfigProcessor

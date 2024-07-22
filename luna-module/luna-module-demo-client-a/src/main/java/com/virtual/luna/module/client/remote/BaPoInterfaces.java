@@ -1,11 +1,11 @@
 package com.virtual.luna.module.client.remote;
 
-import com.virtual.luna.infra.register.annotation.RemoteTransferService;
+import com.virtual.luna.infra.bridge.annotation.TongtianBridge;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
-@RemoteTransferService("test-demo-b")
+@TongtianBridge("test-demo-b")
 public interface BaPoInterfaces {
 
     /**

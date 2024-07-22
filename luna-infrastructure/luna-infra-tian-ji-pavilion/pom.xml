@@ -3,13 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.virtual.luna</groupId>
-        <artifactId>luna-module</artifactId>
+        <artifactId>luna-infrastructure</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>luna-module-demo-client-b</artifactId>
+    <artifactId>luna-infra-tian-ji-pavilion</artifactId>
     <packaging>jar</packaging>
-
     <name>${project.artifactId}</name>
 
     <properties>
@@ -19,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.virtual.luna</groupId>
-            <artifactId>luna-infra-tong-tian-bridge</artifactId>
+            <artifactId>luna-starter-web</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>

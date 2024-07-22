@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>com.virtual.luna</groupId>
-            <artifactId>luna-server-system-center</artifactId>
+            <artifactId>luna-server-tian-ji-pavilion</artifactId>
             <version>${revision}</version>
             <scope>test</scope>
         </dependency>

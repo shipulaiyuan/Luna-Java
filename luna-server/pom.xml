@@ -17,7 +17,7 @@
 
     <packaging>pom</packaging>
     <modules>
-        <module>luna-server-system-center</module>
+        <module>luna-server-tian-ji-pavilion</module>
         <module>luna-server-demo-client-a</module>
         <module>luna-server-demo-client-b</module>
         <module>luna-server-demo-javalin</module>

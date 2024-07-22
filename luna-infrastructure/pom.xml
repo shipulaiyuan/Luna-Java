@@ -10,8 +10,9 @@
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <modules>
-        <module>luna-infra-system-center</module>
-        <module>luna-infra-system-center-register</module>
+        <module>luna-infra-tian-ji-pavilion-admin</module>
+        <module>luna-infra-tian-ji-pavilion</module>
+        <module>luna-infra-tong-tian-bridge</module>
     </modules>
 
     <dependencies>

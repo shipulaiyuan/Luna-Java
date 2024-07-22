@@ -1,0 +1,268 @@
+# ========== Spring ==========
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  application:
+    # 项目名
+    name: luna-server-tian-ji-pavilion
+  main:
+    # 允许循环依赖。
+    allow-circular-references: true
+  jackson:
+    # 标准时间格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  # ========== Quartz ==========
+  quartz:
+    # 是否开启定时任务
+    auto-startup: false
+    # Scheduler 名字。默认为 schedulerName
+    scheduler-name: LunaSchedulerName
+    # Job 存储器类型。默认为 memory 表示内存，可选 jdbc 使用数据库。
+    job-store-type: jdbc
+    # 应用关闭时，是否等待定时任务执行完成。默认为 false ，建议设置为 true
+    wait-for-jobs-to-complete-on-shutdown: true
+    # 添加 Quartz Scheduler 附加属性
+    properties:
+      org:
+        quartz:
+          # Scheduler 相关配置
+          scheduler:
+            instanceName: LunaCenterServerSchedulerName
+            # 自动生成 instance ID
+            instanceId: AUTO
+          # JobStore 相关配置
+          jobStore:
+            # JobStore 实现类。
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            # 是否为集群模式
+            isClustered: true
+            # 集群检查频率，单位：毫秒。默认为 15000。
+            clusterCheckinInterval: 15000
+            # misfire 阀值，单位：毫秒。
+            misfireThreshold: 60000
+          # 线程池相关配置
+          threadPool:
+            # 线程池大小。默认为 10 。
+            threadCount: 25
+            # 线程优先级
+            threadPriority: 5
+            # 线程池类型
+            class: org.quartz.simpl.SimpleThreadPool
+    # 使用 JDBC 的 JobStore 的时候，JDBC 的配置
+    jdbc:
+      # 是否自动使用 SQL 初始化 Quartz 表结构。
+      initialize-schema: NEVER
+
+  # ========== Servlet ==========
+  servlet:
+    multipart:
+      max-file-size: 10MB # 单个文件大小
+      max-request-size: 20MB # 设置总上传的文件大小
+
+  # ========== Mysql ==========
+  datasource:
+    # 数据库连接 URL
+    url: jdbc:mysql://172.17.0.207:3306/luna-system-center?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    # 数据库用户名
+    username: luna-system-center
+    # 数据库密码
+    password: D7PAddk2tZpGGMjZ
+    # 数据库驱动类名
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据源类型
+    type: com.alibaba.druid.pool.DruidDataSource
+    # Druid
+    druid:
+      # 初始化连接池大小
+      initial-size: 5
+      # 最小空闲连接数
+      min-idle: 5
+      # 最大活跃连接数
+      maxActive: 20
+      # 多久执行一次空闲连接回收，单位：毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 连接在池中最小生存时间，单位：毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 用于检测连接是否有效的 SQL
+      validationQuery: SELECT 1
+      # 空闲时检测连接是否有效
+      testWhileIdle: true
+      # 借用连接时不检测其有效性
+      testOnBorrow: false
+      # 归还连接时不检测其有效性
+      testOnReturn: false
+      stat-view-servlet:
+        # 是否允许 StatViewServlet
+        allow: true
+      web-stat-filter:
+        # 启用 WebStatFilter
+        enabled: true
+        # StatFilter 的 URL 模式
+        url-pattern: /druid/*
+      # 配置过滤器
+      filters: stat,wall,slf4j
+      # 连接属性配置
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+  # ======== Redis配置 ========
+  data:
+    redis:
+      # 地址
+      host: 172.17.0.207
+      # 端口
+      port: 9001
+      # 数据库索引
+      database: 1
+      # 密码
+      password: 123456
+      # 连接超时时间
+      timeout: 10s
+      # 连接池
+      lettuce:
+        pool:
+          # 连接池中的最小空闲连接
+          min-idle: 0
+          # 连接池中的最大空闲连接
+          max-idle: 8
+          # 连接池的最大数据库连接数
+          max-active: 8
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+  web:
+    resources:
+      static-locations: classpath:/dist/
+
+# ======== MyBatis 配置 ========
+mybatis-plus:
+  # Mapper 文件的位置
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  global-config:
+    # 关闭 MyBatis-Plus 自带的 Banner
+    banner: false
+    db-config:
+      # 主键类型配置
+      id-type: ASSIGN_ID
+  configuration:
+    # 返回类型为 Map 时显示 null 对应的字段
+    call-setters-on-nulls: true
+    # 配置 SQL 日志实现类
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+# ======== 服务 配置 ========
+server:
+  port: 11000
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # 连接数满后的排队数，默认为100
+    accept-count: 1000
+    threads:
+      # tomcat最大线程数，默认为200
+      max: 800
+      # Tomcat启动初始化的线程数，默认值10
+      min-spare: 100
+
+# ======== 服务注册发现 ========
+service:
+  # 服务名
+  name: 翼渡系统中心服务
+  # 服务唯一标识
+  key: luna-server-tian-ji-pavilion
+  # 是否启用注册
+  enabled: false
+  # 健康检查配置
+  health_check:
+    # 健康检查接口路径
+    endpoint: /healthy
+    # 健康检查间隔时间（毫秒）
+    interval_ms: 10000
+    # 地址获取模式: config（手动配置）, client（客户端自动获取）, server（服务端自动获取）
+    address_mode: server
+    # 健康检查地址，当 address_mode 为 config 时使用
+    address: 172.17.0.231
+    # 健康检查端口
+    port: ${server.port}
+    # 是否启用健康检查
+    enabled: true
+  # 注册配置
+  registration:
+    # 注册服务的URL
+    url: http://172.17.0.207:11000/server-register
+    # 注册间隔时间（毫秒）
+    interval_ms: 30000
+    # 最大注册实例数
+    max_instances: 5
+  # 服务端获取配置
+  config-addr: http://172.17.0.207:11000/server-config/${service.key}
+  config-enabled: false
+luna:
+  # 项目名
+  name: ${spring.application.name}
+  # 系统简介
+  description: 天机阁管理
+  # 版本
+  version: 1.0.0
+  # Web 配置
+  web:
+    apiList:
+      - prefix: "/app-api/v1"    # API 的前缀
+        controller: "**.controller.app.**"    # 控制器包路径
+      - prefix: "/admin-api/v1"
+        controller: "**.controller.admin.**"
+  # Xss
+  xss:
+    enable: true
+    # 排除链接
+    exclude-urls:
+      - /admin/** # 不处理 admin 的请求
+  # Swagger
+  swagger:
+    # 标题
+    title: ${luna.name}
+    # 简介
+    description: ${luna.description}
+    # 版本
+    version: ${luna.version}
+    # Email
+    email: system.center.luna.com
+    # License
+    license: Luna
+    # Url
+    license-url: https://system.center.luna.com
+  security:
+    # Jwt 密钥
+    jwtSecret: eaeb17bc-6ae3-4961-ad24-b7228f3dbe24
+    # mock 模式的开关
+    mockEnable: false
+    # mock 模式打开后 密钥
+    mockSecret: 123456
+    # Security PermitAllUrls
+    permit-all-urls:
+      #      - ${luna.web.apiList[1].prefix}/server-config/**
+      - /admin/**
+
+# ======== 接口文档配置 ========
+springdoc:
+  # api-docs 文档
+  api-docs:
+    # 是否开启 文档
+    enabled: true
+    # 文档 地址
+    path: /v3/api-docs
+  swagger-ui:
+    # 是否开启 UI
+    enabled: true
+    # Swagger 网址 : /swagger-ui/index.html
+    path: /swagger-ui
+
+# ======== 系统日志设置 ========
+logging:
+  level:
+    com.virtual.luna: debug
+    org.springframework: warn
+
+
+

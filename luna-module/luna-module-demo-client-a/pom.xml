@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.virtual.luna</groupId>
-            <artifactId>luna-infra-system-center-register</artifactId>
+            <artifactId>luna-infra-tong-tian-bridge</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>

@@ -1,26 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.virtual.luna</groupId>
         <artifactId>luna-module</artifactId>
         <version>${revision}</version>
     </parent>
-
-    <artifactId>luna-module-demo-client-b</artifactId>
-    <packaging>jar</packaging>
-
+    <artifactId>luna-module-tian-ji-pavilion-admin</artifactId>
     <name>${project.artifactId}</name>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.virtual.luna</groupId>
-            <artifactId>luna-infra-tong-tian-bridge</artifactId>
+            <artifactId>luna-infra-tian-ji-pavilion-admin</artifactId>
             <version>${revision}</version>
         </dependency>
+
     </dependencies>
+
+
 </project>

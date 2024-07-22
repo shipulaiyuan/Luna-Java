@@ -27,7 +27,6 @@
         <jwt.version>9.31</jwt.version>
         <extism.version>1.0.0</extism.version>
         <grpc.version>2.10.1.RELEASE</grpc.version>
-<!--        <javalin.version>5.6.1</javalin.version>-->
     </properties>
 
     <dependencyManagement>
@@ -144,13 +143,6 @@
                 <artifactId>grpc-server-spring-boot-starter</artifactId>
                 <version>${grpc.version}</version>
             </dependency>
-
-            <!-- java lin -->
-<!--            <dependency>-->
-<!--                <groupId>io.javalin</groupId>-->
-<!--                <artifactId>javalin</artifactId>-->
-<!--                <version>${javalin.version}</version>-->
-<!--            </dependency>-->
 
         </dependencies>
     </dependencyManagement>
