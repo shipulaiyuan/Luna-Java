@@ -38,23 +38,24 @@
 
 **天机阁** 🏯
 
-天机阁象征着智慧与战略，是微服务体系的核心与根基。它负责所有服务的注册、发现和配置管理。作为微服务架构的枢纽，天机阁确保各个服务的无缝协作和高效运作，是保障系统稳定性和可靠性的关键所在。
+天机阁象征着智慧与战略，是微服务体系的核心与根基。它负责所有服务的注册、发现和配置管理。
 
 参考文档： [天机阁 文档](luna-infrastructure/luna-infra-tian-ji-pavilion/ReadMe.md)
 
 **通天桥  🌉**
 
-通天桥象征着连接天与地的桥梁，寓意服务之间的通信与调用，通畅无阻。它是一个自定义的服务通讯中间件，旨在提供高效、稳定的服务间调用解决方案。通过 @TongtianBridge 注解，通天桥可以方便地定义和调用远程服务，类似于 Feign， 实现了服务之间的无缝通信。
+通天桥象征着连接天与地的桥梁，寓意服务之间的通信与调用，通畅无阻。它是一个自定义的服务通讯中间件，旨在提供高效、稳定的服务间调用解决方案。
 
 参考文档： [通天桥 文档](luna-infrastructure/luna-infra-tong-tian-bridge/ReadMe.md)
 
 **天机阁管理 (TianJi Pavilion Admin)** 🔧
 
+天机阁管理提供了天机阁的可视化管理界面，使开发者能够更加方便地进行服务的注册、发现、配置管理以及监控。
+
 参考文档： [天机阁管理-文档](luna-script/tian-ji-pavilion-admin/ReadMe.md)
 
-天机阁管理提供了天机阁的可视化管理界面，使开发者能够更加方便地进行服务的注册、发现、配置管理以及监控。通过直观的界面和丰富的功能，天机阁管理极大提升了系统的运维效率和管理体验。
-
 参考文档： [天机阁管理-项目部署](luna-script/tian-ji-pavilion-admin/ReadMe.md)
+
 
 #### 🚀 Luna框架
 
@@ -111,9 +112,9 @@
 
 😀在此，我要特别感谢两个开源项目，大佬牛逼🎈
 
-[RuoYi](https://gitee.com/y_project/RuoYi-Vue)
+[RuoYi 开源项目](https://gitee.com/y_project/RuoYi-Vue)
 
-[YuDao](https://github.com/YunaiV/yudao-cloud)
+[YuDao 开源项目](https://github.com/YunaiV/yudao-cloud)
 
 它们为我提供了宝贵的参考和灵感💡，帮助我在项目中解决了许多技术问题🙌。没有它们的贡献，这个项目无法如此顺利地实现😜。
 
