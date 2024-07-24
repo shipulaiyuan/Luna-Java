@@ -6,7 +6,7 @@
         <artifactId>luna-server</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>luna-server-tian-ji-pavilion</artifactId>
+    <artifactId>luna-server-tian-ji-pavilion-admin</artifactId>
     <name>${project.artifactId}</name>
 
     <packaging>jar</packaging>

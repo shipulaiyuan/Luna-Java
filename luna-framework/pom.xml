@@ -25,6 +25,7 @@
         <module>luna-aliyun-sms</module>
         <module>luna-aliyun-email</module>
         <module>luna-aliyun-oss</module>
+        <module>luna-wechat-pay</module>
     </modules>
 
 </project>

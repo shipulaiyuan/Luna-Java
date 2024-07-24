@@ -236,7 +236,7 @@ luna:
     # Jwt 密钥
     jwtSecret: eaeb17bc-6ae3-4961-ad24-b7228f3dbe24
     # mock 模式的开关
-    mockEnable: false
+    mockEnable: true
     # mock 模式打开后 密钥
     mockSecret: 123456
     # Security PermitAllUrls

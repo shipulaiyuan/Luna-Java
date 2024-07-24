@@ -50,7 +50,6 @@
         </dependency>
 
 
-
         <!-- Test 测试相关 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -64,6 +63,5 @@
         </dependency>
 
     </dependencies>
-
 
 </project>
